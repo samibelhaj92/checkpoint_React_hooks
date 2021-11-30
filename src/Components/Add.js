@@ -1,16 +1,19 @@
-import Button from "@restart/ui/esm/Button";
 import { useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Modal,Button } from "react-bootstrap";
 
-function Example() {
+function AddFlex({handleAdd}) {
     const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
     const [posterURL, setPosterURL] = useState('')
     const [title, setTitle] = useState('');
     const [year, setYear] = useState(0);
     const [director, setDirector] = useState('');
     const [rate, setRate] = useState(0);  
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    
+  
   
     return (
       <>
@@ -23,17 +26,19 @@ function Example() {
             <Modal.Title>Add form</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-    <input type="text" value={posterURL} onChange={(event)=> setPosterURL ({text: event.target.value})}>Title</input>
-     <input type="text" value={title} onChange={(event)=> setTitle ({text: event.target.value})}>Title</input>
-     <input type="text" value={year} onChange={(event)=> setYear ({text: event.target.value})}>Year</input>
-     <input type="text" value={director} onChange={(event)=> setDirector ({text: event.target.value})}>Director</input>
-     <input type="text" value={rate} onChange={(event)=> setRate ({text: event.target.value})}>Rate</input>
+            
+     <input type="text" placeholder="Cover" value={posterURL} onChange={(e)=> setPosterURL( e.target.value)}/>
+     <input type="text" placeholder="Title" value={title} onChange={(e)=> setTitle ( e.target.value)}/>
+     <input type="text" placeholder="Year" value={year} onChange={(e)=> setYear ( e.target.value)}/>
+     <input type="text" placeholder="Director" value={director} onChange={(e)=> setDirector ( e.target.value)}/>
+     <input type="text" placeholder="Rate" value={rate} onChange={(e)=> setRate ( e.target.value)}/>
       </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={handleClose}>
+            <Button variant="primary"  
+            onClick={()=>handleAdd({id:Math.random(), posterURL, title, year, director, rate})}>
               Save Changes
             </Button>
           </Modal.Footer>
@@ -42,4 +47,4 @@ function Example() {
     );
   }
   
-export default Example;
+export default AddFlex;

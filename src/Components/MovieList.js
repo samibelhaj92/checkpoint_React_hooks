@@ -1,13 +1,11 @@
-import React from "react";
-import Example from "./Add";
 import MovieCard from "./MovieCard";
 
-function MovieList({movies}) {
+function MovieList({movies,search, rating}) {
     return (
-<div>
+<div class="cont"  >  
     
-        {movies.map (el=><MovieCard el={el} />)};
-        {movies.map (el=><Example el={el} />)} 
+            {movies.filter(el=>  el.title.toUpperCase().includes(search.toUpperCase())
+            && el.rate>=rating).map((el)=> <MovieCard el={el} /> )}
 </div>
 
     )
